@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="assets/favicon_io/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/favicon_io/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="assets/favicon_io/favicon-16x16.png"
+    />
+    <link rel="manifest" href="assets/favicon_io/site.webmanifest" />
+
+    <title>Carousel</title>
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <header>
+      <h1>Welcome to My Web Page</h1>
+    </header>
+
+    <main>
+      <p>This is the main content area.</p>
+
+      <div class="carousel">
+        <div id="carousel-content">
+          <div class="carousel-item" id="0">
+            <img src="assets/cat1.jpg" alt="Cat 1" />
+          </div>
+          <div class="carousel-item" id="1">
+            <img src="assets/cat2.jpg" alt="Cat 2" />
+          </div>
+          <div class="carousel-item" id="2">
+            <img src="assets/cat3.jpg" alt="Cat 3" />
+          </div>
+          <div class="carousel-item" id="3">
+            <img src="assets/cat4.jpg" alt="Cat 4" />
+          </div>
+          <div class="carousel-item" id="4">
+            <img src="assets/cat5.jpg" alt="Cat 5" />
+          </div>
+        </div>
+        <div class="carousel-controls">
+          <div id="indicators">&#9679;&#9675;&#9675;&#9675;&#9675;</div>
+          <div class="carousel-navigation">
+            <button id="prevBtn">&#10094;</button>
+            <button id="playPauseBtn">&#x23F5;</button>
+            <button id="nextBtn">&#10095;</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>
+        source
+        <a href="https://github.com/abemo/carousel" target="_blank">code</a>
+      </p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "name": "carousel",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/abemo/carousel.git",
+  "author": "abemo <amooreod@lion.lmu.edu>",
+  "license": "MIT"
+}

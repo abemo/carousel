@@ -30,8 +30,8 @@ main {
   justify-content: center;
   align-items: center;
   gap: 5px;
-  width: 600px;
-  height: 400px;
+  width: 60vw;
+  height: 50vh;
   overflow: hidden;
   position: relative;
 }

@@ -43,12 +43,12 @@ function decrementImageIndex() {
 
 prevBtn.addEventListener("click", () => {
   decrementImageIndex();
-  updateCarousel();
+  updateCarousel((direction = "right"));
 });
 
 nextBtn.addEventListener("click", () => {
   incrementImageIndex();
-  updateCarousel();
+  updateCarousel((direction = "left"));
 });
 
 playPauseBtn.addEventListener("click", () => {
@@ -77,10 +77,10 @@ carouselContent.addEventListener("touchend", () => {
   if (Math.abs(distance) > swipeThreshold) {
     if (distance < 0) {
       incrementImageIndex();
-      updateCarousel();
+      updateCarousel((direction = "left"));
     } else {
       decrementImageIndex();
-      updateCarousel();
+      updateCarousel((direction = "right"));
     }
   }
   startX = 0;
@@ -98,11 +98,12 @@ function updateIndicators(imageIndex) {
 }
 
 function animateTransition(direction) {
-  if (direction === "left") {
-    // TODO
-  } else if (direction === "right") {
-    // TODO
-  }
+  let nextImage =
+    direction === "left"
+      ? images[wrapIndex(imageIndex + 1)]
+      : images[wrapIndex(imageIndex - 1)];
+
+  console.log(nextImage);
 }
 
 function updateCarousel(direction) {
@@ -118,7 +119,7 @@ function updateCarousel(direction) {
   images[centerImgIndex].parentElement.classList.add("center");
   images[rightImgIndex].parentElement.classList.add("right");
 
-  animateTransition(direction);
+  if (direction) animateTransition(direction);
 
   updateIndicators(imageIndex);
 }
@@ -130,7 +131,7 @@ function updateCarousel(direction) {
 function applyAutoRotate() {
   if (autoRotate) {
     incrementImageIndex();
-    updateCarousel();
+    updateCarousel((direction = "left"));
   }
 }
 

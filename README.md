@@ -14,5 +14,6 @@ TODOs
 - [ ] add nice animated transition
 - [ ] write Readme with instructions for running
 - [ ] come up with theme/style
+- [ ] optimize mobile styles
 - [ ] add ability to add and remove images from carousel
 - [ ] add variable swipe (faster/bigger swipe moves more images)

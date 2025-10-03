@@ -25,6 +25,7 @@ main {
 
 .carousel {
   outline: black solid 1px;
+  overflow: hidden;
 }
 
 #carousel-content {
@@ -38,10 +39,20 @@ main {
   height: 50vh;
   overflow: hidden;
   position: relative;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+#carousel-content.fade-out {
+  opacity: 0;
+}
+
+#carousel-content.fade-in {
+  opacity: 1;
 }
 
 .carousel-item {
   flex: 0 0 50%;
+  flex-direction: column;
   display: none;
   justify-content: center;
   align-items: center;

@@ -106,22 +106,43 @@ function animateTransition(
   centerImgIndex,
   rightImgIndex
 ) {
-  let nextImage =
-    direction === "left"
-      ? images[wrapIndex(imageIndex + 1)]
-      : images[wrapIndex(imageIndex - 1)];
+  const imageWidth = images[0].clientWidth;
+  const moveDistance = imageWidth + 20;
 
-  // if carousel is moving left, next image comes from right
-  // left image goes off screen to left
-  // center image moves to left
-  // right image moves to center
-  // next image moves from off screen right to right
-
-  // if carousel is moving right, next image comes from left
-  // right image goes off screen to right
-  // center image moves to right
-  // left image moves to center
-  // next image moves from off screen left to left
+  if (direction === "left") {
+    // if carousel is moving left, next image comes from right
+    const nextImgIndex = wrapIndex(rightImgIndex + 1);
+    const nextImg = images[nextImgIndex].parentElement;
+    // left image goes off screen to left
+    images[
+      leftImgIndex
+    ].parentElement.style.transform = `translateX(-${moveDistance}px)`;
+    // center image moves to left
+    images[
+      centerImgIndex
+    ].parentElement.style.transform = `translateX(-${moveDistance}px)`;
+    // right image moves to center
+    images[rightImgIndex].parentElement.style.transform = `translateX(0)`;
+    // next image moves from off screen right to right
+    nextImg.style.transform = `translateX(0)`;
+  } else if (direction === "right") {
+    // if carousel is moving right, next image comes from left
+    const nextImgIndex = wrapIndex(leftImgIndex - 1);
+    const nextImg = images[nextImgIndex].parentElement;
+    nextImg.style.transform = `translateX(-${moveDistance}px)`;
+    // right image goes off screen to right
+    images[
+      rightImgIndex
+    ].parentElement.style.transform = `translateX(${moveDistance}px)`;
+    // center image moves to right
+    images[
+      centerImgIndex
+    ].parentElement.style.transform = `translateX(${moveDistance}px)`;
+    // left image moves to center
+    images[leftImgIndex].parentElement.style.transform = `translateX(0)`;
+    // next image moves from off screen left to left
+    nextImg.style.transform = `translateX(0)`;
+  }
 }
 
 function updateCarousel(direction) {

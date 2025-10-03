@@ -42,7 +42,6 @@ main {
   gap: 5px;
   margin: 5px;
   width: 60vw;
-  /* height: 50vh; */
   overflow: hidden;
   position: relative;
   transition: transform 1.5s ease, opacity 1.5s ease;
@@ -62,6 +61,7 @@ main {
   display: none;
   justify-content: center;
   align-items: center;
+  transition: transform 0.5s ease-in-out;
 }
 
 .carousel-item.left,

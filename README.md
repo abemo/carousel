@@ -12,7 +12,6 @@ TODOs
 - [x] add swipe/touch functionality touchstart, touchmove, touchend
 - [x] add sound play/stop button for each album
 - [x] come up with theme/style
-- [ ] optimize mobile styles - when landscape on mobile, some gets cut off
-
+- [x] optimize mobile styles
 - [ ] add nice animated transition
 - [ ] write Readme with instructions for running, my thoughts, dev process

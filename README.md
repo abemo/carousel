@@ -8,8 +8,9 @@ TODOs
 - [x] add title, tab icon thing
 - [x] clean up code, I feel like I have some repeated stuff
 - [x] make carousel size responsive
-- [ ] add nice animated transition
+- [x] center image should be 50%, left/right 25%
 
+- [ ] add nice animated transition
 - [ ] add swipe/touch functionality
 - [ ] write Readme with instructions for running
 - [ ] come up with theme/style

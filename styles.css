@@ -30,6 +30,7 @@ main {
   justify-content: center;
   align-items: center;
   gap: 5px;
+  margin: 5px;
   width: 60vw;
   height: 50vh;
   overflow: hidden;
@@ -51,16 +52,19 @@ main {
 
 .carousel-item.left {
   order: 1;
+  opacity: 0.5;
 }
 .carousel-item.center {
   order: 2;
+  opacity: 1;
 }
 .carousel-item.right {
   order: 3;
+  opacity: 0.5;
 }
 
 .carousel-item img {
-  width: 100%;
+  width: 30vw;
   height: auto;
   object-fit: cover;
 }

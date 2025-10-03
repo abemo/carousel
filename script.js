@@ -100,66 +100,48 @@ function updateIndicators(imageIndex) {
   indicators.innerHTML = updatedIndicators.join("");
 }
 
-function animateTransition(
-  direction,
-  leftImgIndex,
-  centerImgIndex,
-  rightImgIndex
-) {
-  const imageWidth = images[0].clientWidth;
-  const moveDistance = imageWidth + 20;
-
-  if (direction === "left") {
-    // if carousel is moving left, next image comes from right
-    const nextImgIndex = wrapIndex(rightImgIndex + 1);
-    const nextImg = images[nextImgIndex].parentElement;
-    // left image goes off screen to left
-    images[
-      leftImgIndex
-    ].parentElement.style.transform = `translateX(-${moveDistance}px)`;
-    // center image moves to left
-    images[
-      centerImgIndex
-    ].parentElement.style.transform = `translateX(-${moveDistance}px)`;
-    // right image moves to center
-    images[rightImgIndex].parentElement.style.transform = `translateX(0)`;
-    // next image moves from off screen right to right
-    nextImg.style.transform = `translateX(0)`;
-  } else if (direction === "right") {
-    // if carousel is moving right, next image comes from left
-    const nextImgIndex = wrapIndex(leftImgIndex - 1);
-    const nextImg = images[nextImgIndex].parentElement;
-    nextImg.style.transform = `translateX(-${moveDistance}px)`;
-    // right image goes off screen to right
-    images[
-      rightImgIndex
-    ].parentElement.style.transform = `translateX(${moveDistance}px)`;
-    // center image moves to right
-    images[
-      centerImgIndex
-    ].parentElement.style.transform = `translateX(${moveDistance}px)`;
-    // left image moves to center
-    images[leftImgIndex].parentElement.style.transform = `translateX(0)`;
-    // next image moves from off screen left to left
-    nextImg.style.transform = `translateX(0)`;
-  }
-}
-
 function updateCarousel(direction) {
-  const leftImgIndex = wrapIndex(imageIndex - 1);
-  const centerImgIndex = wrapIndex(imageIndex);
-  const rightImgIndex = wrapIndex(imageIndex + 1);
-
   Array.from(images).forEach((element) => {
-    element.parentElement.classList.remove("left", "center", "right");
+    element.parentElement.classList.remove(
+      "outside-left",
+      "left",
+      "center",
+      "right",
+      "outside-right",
+      "animate-left",
+      "animate-right"
+    );
   });
 
-  images[leftImgIndex].parentElement.classList.add("left");
-  images[centerImgIndex].parentElement.classList.add("center");
-  images[rightImgIndex].parentElement.classList.add("right");
+  images[wrapIndex(imageIndex - 2)].parentElement.classList.add("outside-left");
+  images[wrapIndex(imageIndex - 1)].parentElement.classList.add("left");
+  images[wrapIndex(imageIndex)].parentElement.classList.add("center");
+  images[wrapIndex(imageIndex + 1)].parentElement.classList.add("right");
+  images[wrapIndex(imageIndex + 2)].parentElement.classList.add(
+    "outside-right"
+  );
 
-  if (direction)
-    animateTransition(direction, leftImgIndex, centerImgIndex, rightImgIndex);
+  carouselImages = [
+    images[wrapIndex(imageIndex - 2)],
+    images[wrapIndex(imageIndex - 1)],
+    images[wrapIndex(imageIndex)],
+    images[wrapIndex(imageIndex + 1)],
+    images[wrapIndex(imageIndex + 2)],
+  ];
+
+  if (direction) {
+    carouselImages.forEach((img) => {
+      const carouselItem = img.parentElement;
+      carouselItem.classList.remove("animate-left", "animate-right");
+      void carouselItem.offsetWidth;
+
+      if (direction === "left") {
+        carouselItem.classList.add("animate-left");
+      } else if (direction === "right") {
+        carouselItem.classList.add("animate-right");
+      }
+    });
+  }
 
   updateIndicators(imageIndex);
 
@@ -177,10 +159,6 @@ function applyAutoRotate() {
     updateCarousel((direction = "left"));
   }
 }
-
-setInterval(applyAutoRotate, autoRotateInterval);
-
-updateCarousel();
 
 // ====================================================================
 //                          Sound Controls
@@ -212,3 +190,10 @@ soundToggleBtn.addEventListener("click", () => {
   pauseAllAudio();
   setCurrentAudioState(imageIndex);
 });
+
+// ====================================================================
+//                          Initialization
+// ====================================================================
+
+setInterval(applyAutoRotate, autoRotateInterval);
+updateCarousel();

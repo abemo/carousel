@@ -14,12 +14,15 @@ let indicators = document.getElementById("indicators");
 let imageIndex = 0;
 let autoRotate = false;
 const autoRotateInterval = 5000;
+let soundOn = false;
 const swipeThreshold = 50;
 
 const playSymbol = "&#x23F5;";
 const pauseSymbol = "&#x23F8;";
 const emptyCircleSymbol = "&#9675;";
 const filledCircleSymbol = "&#9679;";
+const speakerIcon = "&#128263;";
+const crossedSpeakerIcon = "&#128266;";
 
 // ====================================================================
 //                          Helper Functions
@@ -97,13 +100,28 @@ function updateIndicators(imageIndex) {
   indicators.innerHTML = updatedIndicators.join("");
 }
 
-function animateTransition(direction) {
+function animateTransition(
+  direction,
+  leftImgIndex,
+  centerImgIndex,
+  rightImgIndex
+) {
   let nextImage =
     direction === "left"
       ? images[wrapIndex(imageIndex + 1)]
       : images[wrapIndex(imageIndex - 1)];
 
-  console.log(nextImage);
+  // if carousel is moving left, next image comes from right
+  // left image goes off screen to left
+  // center image moves to left
+  // right image moves to center
+  // next image moves from off screen right to right
+
+  // if carousel is moving right, next image comes from left
+  // right image goes off screen to right
+  // center image moves to right
+  // left image moves to center
+  // next image moves from off screen left to left
 }
 
 function updateCarousel(direction) {
@@ -119,9 +137,13 @@ function updateCarousel(direction) {
   images[centerImgIndex].parentElement.classList.add("center");
   images[rightImgIndex].parentElement.classList.add("right");
 
-  if (direction) animateTransition(direction);
+  if (direction)
+    animateTransition(direction, leftImgIndex, centerImgIndex, rightImgIndex);
 
   updateIndicators(imageIndex);
+
+  pauseAllAudio();
+  if (soundOn) setCurrentAudioState(imageIndex);
 }
 
 // ====================================================================
@@ -138,3 +160,34 @@ function applyAutoRotate() {
 setInterval(applyAutoRotate, autoRotateInterval);
 
 updateCarousel();
+
+// ====================================================================
+//                          Sound Controls
+// ====================================================================
+const soundToggleBtn = document.getElementById("soundToggleBtn");
+
+function pauseAllAudio() {
+  const allAudios = document.querySelectorAll(".carousel-item audio");
+  allAudios.forEach((audio) => {
+    audio.pause();
+    audio.currentTime = 0;
+  });
+}
+
+function setCurrentAudioState(imageIndex) {
+  const currentAudio = images[imageIndex].parentElement.querySelector("audio");
+
+  if (soundOn) {
+    currentAudio.play();
+  } else {
+    currentAudio.pause();
+  }
+}
+
+soundToggleBtn.addEventListener("click", () => {
+  soundOn = !soundOn;
+  soundToggleBtn.innerHTML = soundOn ? speakerIcon : crossedSpeakerIcon;
+
+  pauseAllAudio();
+  setCurrentAudioState(imageIndex);
+});

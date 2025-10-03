@@ -10,10 +10,9 @@ TODOs
 - [x] make carousel size responsive
 - [x] center image should be 50%, left/right 25%
 - [x] add swipe/touch functionality touchstart, touchmove, touchend
+- [x] add sound play/stop button for each album
+- [x] come up with theme/style
+- [ ] optimize mobile styles - when landscape on mobile, some gets cut off
 
 - [ ] add nice animated transition
-- [ ] write Readme with instructions for running
-- [ ] come up with theme/style
-- [ ] optimize mobile styles
-- [ ] add ability to add and remove images from carousel
-- [ ] add variable swipe (faster/bigger swipe moves more images)
+- [ ] write Readme with instructions for running, my thoughts, dev process
